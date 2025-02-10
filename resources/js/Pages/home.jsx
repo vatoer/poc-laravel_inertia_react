@@ -1,11 +1,23 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {useRoute} from "../../../vendor/tightenco/ziggy"
+import { useState } from "react";
 
 export default function Home({ posts }) {
     const route = useRoute();
+    const {flash} = usePage().props;
+    console.log(usePage());
+
+    const [flashMsg, setFlashMsg] = useState(flash.message);
+
+    setTimeout(() => {
+        setFlashMsg(null);
+    }, 1500);
+
+
     return (
         <div>
             <h1 className="title">Hello</h1>
+            {flashMsg && <div className="absolute top-24 right-6 bg-rose-500 p-2 rounded-md shadow-lg text-sm text-white">{flashMsg}</div>}
             <div>
                 {posts.data.map((post) => (
                     <div
