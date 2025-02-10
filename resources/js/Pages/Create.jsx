@@ -1,5 +1,4 @@
-import { useForm } from "@inertiajs/react";
-
+import { useForm,Head } from "@inertiajs/react";
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
         body: "",
@@ -13,7 +12,14 @@ export default function Create() {
     console.log(errors);
 
     return (
-        <div>
+        <>
+            <Head>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="This is the CREATE description"
+                />
+            </Head>
             <h1 className="title">Create post</h1>
 
             {data.body}
@@ -26,17 +32,19 @@ export default function Create() {
                         rows={6}
                         value={data.body}
                         onChange={(e) => setData("body", e.target.value)}
-                        className={`${errors.body ? "!ring-red-500" : ""} w-full p-2 border focus:outline-none border-gray-300 rounded`}
+                        className={`${
+                            errors.body ? "!ring-red-500" : ""
+                        } w-full p-2 border focus:outline-none border-gray-300 rounded`}
                         placeholder="What's on your mind"
                     ></textarea>
                     {errors.body && (
                         <div className="text-red-500">{errors.body}</div>
                     )}
-                    <button className="primary-btn mt-4"
-                    disabled={processing}
-                    >Create Post</button>
+                    <button className="primary-btn mt-4" disabled={processing}>
+                        Create Post
+                    </button>
                 </form>
             </div>
-        </div>
+        </>
     );
 }
